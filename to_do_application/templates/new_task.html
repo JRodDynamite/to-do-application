@@ -1,0 +1,27 @@
+{% extends 'registration/base.html' %}
+
+{% block title %}List Task{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{% endblock %}
+
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $( function() {
+    $( "#id_due_date" ).datepicker();
+    $( "#datepicker" ).datepicker( "option", "dateFormat", "yyyy-mm-dd" );
+  } );
+ </script>
+{% endblock %}
+
+{% block content %}
+  <h2>Task Item</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+{% endblock %}

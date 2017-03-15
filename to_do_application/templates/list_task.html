@@ -1,0 +1,44 @@
+{% extends 'registration/base.html' %}
+
+{% block title %}List Task{% endblock %}
+
+{% block content %}
+<div class="container">
+  <a class="btn btn-primary" href="{% url 'new_task' %}">New Task</a>
+  <table class="table table-striped">
+  	<thead>
+  		<tr>
+        <th></th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Priority</th>
+        <th>State of Task</th>
+        <th>Due Date</th>
+      </tr>
+  	</thead>
+  	<tbody>
+    {% for res in results %}
+      <tr class="
+          {% if res.is_past_due %}
+            danger
+          {% elif res.state_of_task == 1 %}
+            active
+          {% elif res.state_of_task == 2 %}
+            warning
+          {% elif res.state_of_task == 3 %}
+            success
+          {% endif %}
+        ">
+        <td><a href="/edit/{{ res.item_id }}">Edit</a></td>
+        <td>{{ res.name }}</td>
+        <td>{{ res.description }}</td>
+        <td>{{ res.get_priority_display }}</td>
+        <td>{{ res.get_state_of_task_display }}</td>
+        <td>{{ res.due_date }}</td>
+      </tr>
+    {% endfor %}
+  	</tbody>
+  </table>
+</div>
+{% endblock %}
+

@@ -17,12 +17,14 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-from task.views import show_todo_list
+from task.views import show_todo_list, save_item_task, edit_item_task
 
 urlpatterns = [
     url(r'^accounts/login/$', auth_views.login, name='login'),
     url(r'^accounts/logout/$', auth_views.logout, name='logout'),
     url(r'^$', show_todo_list, name='home'),
+    url(r'^add/$', save_item_task, name='new_task'),
+    url(r'^edit/(\d+)$', edit_item_task, name='edit_task'),
 
     url(r'^admin/', admin.site.urls),
 ]
